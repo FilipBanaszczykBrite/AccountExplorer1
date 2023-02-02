@@ -41,7 +41,7 @@
                     <th scope="col" style="width:3.25rem">
                         <div class="slds-cell-wrap">Billing Postal Code</div>
                     </th>
-                    <th scope="col" style="width:4.25rem">
+                    <th scope="col" style="width:7.25rem">
                         <div class="slds-cell-wrap">Action</div>
                     </th>
 
@@ -99,8 +99,11 @@
                                     </div>
                                 </div>
                             </td>
-                            <td scope="row" style= "width:6.25rem; white-space: normal; word-wrap: break-word;">
+                            <td scope="row" style= "white-space: normal; word-wrap: break-word;">
                                 <div class="slds-grid slds-gutters">
+                                    <div class="slds-col" onclick="{!c.editAccountRow}" id="{!account.Id}">
+                                        <lightning:button label="Edit" variant="neutral"  />
+                                    </div>
                                     <div class="slds-col" onclick="{!c.deleteAccountRow}" id="{!account.Id}">
                                         <lightning:button label="Delete" variant="destructive"  />
                                     </div>

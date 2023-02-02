@@ -1,6 +1,7 @@
 
 ({
-    doInit: function(cmp, event, handler){
+    doInit: function(cmp, event, helper){
+
 
     },
 

@@ -12,6 +12,13 @@
 
    },
 
+   editAccountRow: function(cmp, event, helper){
+          event.stopPropagation()
+          console.log('EDIT controller '+event);
+          helper.handlerEditAccount(cmp, event);
+
+      },
+
    showAccountDetails: function(cmp, event, helper){
        console.log('controller '+event);
         helper.handlerShowDetails(cmp, event);

@@ -2,14 +2,65 @@
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:handler event="c:AE_OpenCreatePopup" action="{!c.open}"/>
     <aura:attribute name="createPopupOpened" type="Boolean"/>
+    <aura:attribute name="newAccounts" type="List"/>
     <aura:if isTrue="{!v.createPopupOpened}">
         <div class="container">
             <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
-                     aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open" style="width:100%; background-color: rgba( 0, 0, 0, 0.5);">
-                <div class="slds-modal__container" >
+                     aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open"
+                     style="width:100%; background-color: rgba( 0, 0, 0, 0.5);">
+                <div style="width:74%; margin-left: 13%; margin-top: 20%">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout">
+                        <thead>
+                        <tr class="slds-text-title" style="width: 1000px">
+                            <th scope="col" style="width:6.25rem">
+                                <div class="slds-cell-wrap">Name</div>
+                            </th>
+                            <th scope="col" style="width:8.25rem">
+                                <div class="slds-cell-wrap">Website</div>
+                            </th>
+                            <th scope="col" style="width:4.25rem">
+                                <div class="slds-cell-wrap">Billing Country</div>
+                            </th>
+                            <th scope="col" style="width:6.25rem">
+                                <div class="slds-cell-wrap">Billing City</div>
+                            </th>
+                            <th scope="col" style="width:8.25rem">
+                                <div class="slds-cell-wrap">Billing Street</div>
+                            </th>
+                            <th scope="col" style="width:6.25rem">
+                                <div class="slds-cell-wrap">Billing Postal Code</div>
+                            </th>
 
-                    <footer class="slds-modal__footer" >
-                        <div style="position:absolute; left: 15px">
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.newAccounts}" var="account" indexVar="index">
+                                <tr>
+                                    <td scope="row">
+                                        <lightning:input name="name" label=""/>
+                                    </td>
+                                    <td scope="row">
+                                        <lightning:input name="website" label=""/>
+                                    </td>
+                                    <td scope="row">
+                                        <lightning:input name="country" label=""/>
+                                    </td>
+                                    <td scope="row">
+                                        <lightning:input name="city" label=""/>
+                                    </td>
+                                    <td scope="row">
+                                        <lightning:input name="street" label=""/>
+                                    </td>
+                                    <td scope="row">
+                                        <lightning:input name="postal" label=""/>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+
+                    <footer class="slds-modal__footer">
+                        <div style="position:absolute; left: calc(13% + 15px)">
                             <lightning:button variant="success"
                                               label="New"
                                               title="New"

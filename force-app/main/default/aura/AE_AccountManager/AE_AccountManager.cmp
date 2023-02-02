@@ -8,5 +8,6 @@
     </div>
     <div class="modal">
         <c:AE_NewAccountsModal createPopupOpened="false"/>
+        <c:AE_EditAccountModal editPopupOpened="false"/>
     </div>
 </aura:component>

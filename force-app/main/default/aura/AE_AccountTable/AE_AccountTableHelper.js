@@ -44,5 +44,13 @@
         appEvent.setParams({"accountId" : account.Id});
         appEvent.fire();
         $A.util.toggleClass(spinner, "slds-hide");
-     }
+     },
+
+     handlerEditAccount: function(cmp, event){
+            var accountId = event.target.id;
+
+             var appEvent = $A.get("e.c:AE_OpenEditPopup");
+             appEvent.setParams({"accountId" : accountId});
+             appEvent.fire();
+          }
 });

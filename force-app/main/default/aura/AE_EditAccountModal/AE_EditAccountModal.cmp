@@ -1,0 +1,43 @@
+<aura:component description="AE_EditAccountModal">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:AE_OpenEditPopup" action="{!c.open}"/>
+    <aura:attribute name="editPopupOpened" type="Boolean"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:if isTrue="{!v.editPopupOpened}">
+        <div class="container">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                     aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open"
+                     style="width:100%; background-color: rgba( 0, 0, 0, 0.5);">
+                <div style="width:74%; margin-left: 13%; margin-top: 5%">
+                    <lightning:card title="Edit Account">
+                        <aura:set attribute="actions">
+                            <lightning:button label="Close" onclick="{!c.closeDetails}"/>
+                        </aura:set>
+
+                        <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Account" onsubmit="{!c.reloadView}">
+                            <lightning:messages/>
+                            <div class="formColumn" style="display:inline-block; width: calc(50% - 10px);">
+                                <lightning:inputField fieldName="Name"/>
+                                <lightning:inputField fieldName="Website"/>
+                                <lightning:inputField fieldName="Industry"/>
+                                <lightning:inputField fieldName="Phone"/>
+                                <lightning:inputField fieldName="BillingCountry"/>
+                                <lightning:inputField fieldName="BillingCity"/>
+                            </div>
+                            <div class="formColumn" style="display:inline-block; width: calc(50% - 10px);">
+
+                                <lightning:inputField fieldName="BillingStreet"/>
+                                <lightning:inputField fieldName="BillingPostalCode"/>
+                                <lightning:inputField fieldName="Industry"/>
+                                <lightning:inputField fieldName="Active__c"/>
+                            </div>
+                            <div style="margin: 10px; margin-left: 90%; margin-bottom:100px">
+                                <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update"/>
+                            </div>
+                        </lightning:recordEditForm>
+                    </lightning:card>
+                </div>
+            </section>
+        </div>
+    </aura:if>
+</aura:component>
