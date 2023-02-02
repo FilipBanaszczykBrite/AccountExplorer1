@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="AE_PassAccount">
+    <aura:attribute type="String" name="accountId"/>
+</aura:event>

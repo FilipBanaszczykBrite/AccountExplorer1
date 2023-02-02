@@ -1,0 +1,115 @@
+<aura:component description="AE_AccountTable" controller="AE_AccountTableController">
+    <aura:attribute name="accounts" type="List"/>
+    <aura:attribute name="selectedRow" type="Object"/>
+    <aura:attribute name="accountSelected" type="Boolean"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:AE_RefreshAccountList" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}"/>
+    <aura:registerEvent name="AE_PassAccount" type="c:AE_PassAccount"/>
+    <aura:registerEvent name="AE_OpenCreatePopup" type="c:AE_OpenCreatePopup"/>
+
+    <div class="accountTable">
+
+
+        <lightning:card title="Accounts">
+            <lightning:spinner aura:id="mySpinner" />
+            <aura:set attribute="actions">
+                <lightning:button label="New" onclick="{!c.openCreateModal}"/>
+            </aura:set>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout">
+                <thead>
+                <tr class="slds-text-title">
+                    <th scope="col" style="width:6.25rem">
+                        <div class="slds-cell-wrap">Name</div>
+                    </th>
+
+                    <th scope="col" style="width:8.25rem">
+                        <div class="slds-cell-wrap">Website</div>
+                    </th>
+                    <th scope="col" style="width:3.5rem">
+                        <div class="slds-cell-wrap">Employees</div>
+                    </th>
+                    <th scope="col" style="width:4.25rem">
+                        <div class="slds-cell-wrap">Billing Country</div>
+                    </th>
+                    <th scope="col" style="width:6.25rem">
+                        <div class="slds-cell-wrap">Billing City</div>
+                    </th>
+                    <th scope="col" style="width:8.25rem">
+                        <div class="slds-cell-wrap">Billing Street</div>
+                    </th>
+                    <th scope="col" style="width:3.25rem">
+                        <div class="slds-cell-wrap">Billing Postal Code</div>
+                    </th>
+                    <th scope="col" style="width:4.25rem">
+                        <div class="slds-cell-wrap">Action</div>
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.accounts}" var="account" indexVar="index">
+                        <tr class="slds-hint-parent" onclick="{!c.showAccountDetails}">
+                            <td scope="row" style=" white-space: normal; word-wrap: break-word;">
+                                <div class="slds-grid slds-gutters"  id="{!index}">
+                                    <div class="slds-col">
+                                        <p>{!account.Name}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td scope="row" style= " white-space: normal; word-wrap: break-word;" >
+                                <div class="slds-grid slds-gutters" >
+                                    <div class="slds-col">
+                                        <p>{!account.Website}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td scope="row" style= " white-space: normal; word-wrap: break-word;">
+                                <div class="slds-grid slds-gutters" >
+                                    <div class="slds-col">
+                                        <p>{!account.NumberOfEmployees}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td scope="row" style= "width:6.25rem; white-space: normal; word-wrap: break-word;">
+                                <div class="slds-grid slds-gutters" >
+                                    <div class="slds-col">
+                                        <p>{!account.BillingCountry}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td scope="row" style= "width:6.25rem; white-space: normal; word-wrap: break-word;">
+                                <div class="slds-grid slds-gutters" onclick="{!c.showAccountDetails}">
+                                    <div class="slds-col">
+                                        <p>{!account.BillingCity}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td scope="row" style= "width:6.25rem; white-space: normal; word-wrap: break-word;">
+                                <div class="slds-grid slds-gutters" >
+                                    <div class="slds-col">
+                                        <p>{!account.BillingStreet}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td scope="row" style= "width:6.25rem; white-space: normal; word-wrap: break-word;">
+                                <div class="slds-grid slds-gutters" >
+                                    <div class="slds-col">
+                                        <p>{!account.BillingPostalCode}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td scope="row" style= "width:6.25rem; white-space: normal; word-wrap: break-word;">
+                                <div class="slds-grid slds-gutters">
+                                    <div class="slds-col" onclick="{!c.deleteAccountRow}" id="{!account.Id}">
+                                        <lightning:button label="Delete" variant="destructive"  />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </lightning:card>
+    </div>
+</aura:component>

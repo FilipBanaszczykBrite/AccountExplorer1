@@ -1,0 +1,11 @@
+
+.THIS.container {
+    z-index:0;
+    display:flex;
+    flex-direction: row;
+
+}
+.THIS.modal {
+    z-index:1;
+
+}

@@ -1,0 +1,12 @@
+<aura:component description="AE_AccountManager" implements="flexipage:availableForAllPageTypes, force:appHostable">
+    <aura:attribute name="detailsRecordId" type="String"/>
+    <aura:handler event="c:AE_PassAccount" action="{!c.setDetailAccount}"/>
+    <div class="container">
+        <c:AE_AccountTable />
+        <c:AE_AccountDetails />
+
+    </div>
+    <div class="modal">
+        <c:AE_NewAccountsModal createPopupOpened="false"/>
+    </div>
+</aura:component>
