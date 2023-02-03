@@ -1,5 +1,5 @@
 
-.THIS.formColumn {
+.THIS .formColumn {
     display:inline-block;
     width: calc(50% - 20px);
     

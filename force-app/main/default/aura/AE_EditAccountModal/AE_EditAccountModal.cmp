@@ -3,39 +3,55 @@
     <aura:handler event="c:AE_OpenEditPopup" action="{!c.open}"/>
     <aura:attribute name="editPopupOpened" type="Boolean"/>
     <aura:attribute name="recordId" type="String"/>
+    <aura:registerEvent name="showToast" type="force:showToast"/>
     <aura:if isTrue="{!v.editPopupOpened}">
         <div class="container">
             <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
                      aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open"
-                     style="width:100%; background-color: rgba( 0, 0, 0, 0.5);">
+                     style="width:100%;">
                 <div style="width:74%; margin-left: 13%; margin-top: 5%">
-                    <lightning:card title="Edit Account">
+                    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                             class="slds-modal slds-fade-in-open">
                         <aura:set attribute="actions">
-                            <lightning:button label="Close" onclick="{!c.closeDetails}"/>
+                            <lightning:button label="Close" onclick="{!c.close}"/>
                         </aura:set>
+                        <div class="slds-modal__container">
+                            <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Account"
+                                                      onsubmit="{!c.reloadView}">
+                                <div class="slds-modal__header">
+                                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Edit Account</h1>
+                                </div>
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
 
-                        <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Account" onsubmit="{!c.reloadView}">
-                            <lightning:messages/>
-                            <div class="formColumn" style="display:inline-block; width: calc(50% - 10px);">
-                                <lightning:inputField fieldName="Name"/>
-                                <lightning:inputField fieldName="Website"/>
-                                <lightning:inputField fieldName="Industry"/>
-                                <lightning:inputField fieldName="Phone"/>
-                                <lightning:inputField fieldName="BillingCountry"/>
-                                <lightning:inputField fieldName="BillingCity"/>
-                            </div>
-                            <div class="formColumn" style="display:inline-block; width: calc(50% - 10px);">
+                                    <lightning:messages/>
+                                    <div class="formColumn" style="display:inline-block; width: calc(50% - 10px);">
+                                        <lightning:inputField fieldName="Name"/>
+                                        <lightning:inputField fieldName="Website"/>
+                                        <lightning:inputField fieldName="Industry"/>
+                                        <lightning:inputField fieldName="Phone"/>
+                                        <lightning:inputField fieldName="BillingCountry"/>
+                                        <lightning:inputField fieldName="BillingCity"/>
+                                    </div>
+                                    <div class="formColumn" style="display:inline-block; width: calc(50% - 10px);">
 
-                                <lightning:inputField fieldName="BillingStreet"/>
-                                <lightning:inputField fieldName="BillingPostalCode"/>
-                                <lightning:inputField fieldName="Industry"/>
-                                <lightning:inputField fieldName="Active__c"/>
-                            </div>
-                            <div style="margin: 10px; margin-left: 90%; margin-bottom:100px">
-                                <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update"/>
-                            </div>
-                        </lightning:recordEditForm>
-                    </lightning:card>
+                                        <lightning:inputField fieldName="BillingStreet"/>
+                                        <lightning:inputField fieldName="BillingPostalCode"/>
+                                        <lightning:inputField fieldName="Industry"/>
+                                        <lightning:inputField fieldName="Active__c"/>
+                                    </div>
+
+                                </div>
+                                <div class="slds-modal__footer">
+                                    <lightning:button class="slds-m-top_small" variant="neutral" type="button"
+                                                      name="cancel" label="Cancel" onclick="{!c.close}"/>
+                                    <lightning:button class="slds-m-top_small" variant="brand" type="submit"
+                                                      name="update" label="Update"/>
+                                </div>
+                            </lightning:recordEditForm>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+
                 </div>
             </section>
         </div>

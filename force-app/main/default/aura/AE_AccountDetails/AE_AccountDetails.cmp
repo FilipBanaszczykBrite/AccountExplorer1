@@ -5,7 +5,7 @@
     <aura:attribute name="accountSelected" type="Boolean"/>
     <aura:attribute name="recordId" type="String"/>
     <aura:attribute name="fields" type="String[]"
-                    default="['Name', 'Industry', 'AnnualRevenue', 'Phone', 'YearStarted', 'Active__c']"/>
+                    default="['Name', 'Website', 'Phone', 'Industry', 'AnnualRevenue', 'YearStarted', 'Active__c']"/>
     <aura:handler event="c:AE_PassAccount" action="{!c.loadDetails}"/>
     <aura:if isTrue="{!v.accountSelected}">
         <div class="accountDetails">
@@ -14,20 +14,7 @@
                     <lightning:button label="Close" onclick="{!c.closeDetails}"/>
                 </aura:set>
 
-                <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Account" onsubmit="{!c.reloadView}">
-                    <lightning:messages/>
-                    <lightning:inputField fieldName="Name"/>
-                    <lightning:inputField fieldName="Website"/>
-                    <lightning:inputField fieldName="Industry"/>
-                    <lightning:inputField fieldName="Phone"/>
-                    <lightning:inputField fieldName="BillingCountry"/>
-                    <lightning:inputField fieldName="BillingCity"/>
-                    <lightning:inputField fieldName="BillingStreet"/>
-                    <lightning:inputField fieldName="BillingPostalCode"/>
-                    <lightning:inputField fieldName="Industry"/>
-                    <lightning:inputField fieldName="Active__c"/>
-                    <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update"/>
-                </lightning:recordEditForm>
+                <lightning:recordForm recordId="{!v.recordId}" objectApiName="Account" mode="readonly" fields="{!v.fields}"/>
             </lightning:card>
         </div>
     </aura:if>

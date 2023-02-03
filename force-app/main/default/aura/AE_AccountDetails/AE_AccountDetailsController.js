@@ -9,6 +9,9 @@
 
     loadDetails: function(cmp, event, helper){
         cmp.set("v.accountSelected", true);
+
+
+
         var spinner = cmp.find("myDetailSpinner");
        // $A.util.toggleClass(spinner, "slds-hide");
         var accountId = event.getParam("accountId");
@@ -19,6 +22,7 @@
 
     closeDetails: function(cmp, event, helper){
         cmp.set("v.accountSelected", false);
+
     },
 
     reloadView: function(cmp, event, helper){
