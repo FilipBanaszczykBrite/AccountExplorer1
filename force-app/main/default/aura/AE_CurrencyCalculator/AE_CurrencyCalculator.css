@@ -1,0 +1,98 @@
+
+.THIS .calculator {
+    background-color: rgb(243,246,249);
+    margin-top:10px;
+    margin-left:100px;
+    width: 800px;
+    height: 200px;
+    padding: 27px 0px 24px;
+
+}
+
+.THIS .header{
+    font-size: 2rem;
+    line-height: 3.6rem;
+    margin: 8px 0px;
+    font-family: Merriweather;
+    font-weight: 400;
+}
+
+.THIS .headerContainer{
+    display: flex;
+    margin-left:100px;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.THIS .inputRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.THIS .inputCell{
+    margin-left: 10px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.THIS .inputLabel{
+    color: black;
+    font: 16px Roboto, sans-serif;
+    margin: 0px 0px 10px;
+}
+
+.THIS .input{
+    margin-top:0px;
+}
+
+.THIS .clearButton{
+    background-color: white;
+    position: absolute;
+    right: 5px;
+    top: 32px;
+    border: 0px solid;
+}
+
+.THIS .invertButton{
+    display: flex;
+    margin-top: 32px;
+    background-color: rgba(0, 85, 153, 0);
+    border: 1px solid rgba(0, 85, 153, 0.5);
+    border-radius: 100px;
+    color: rgb(0, 85, 153);
+    height: 25px;
+    width: 45px;
+    padding: 3px 12px;
+    content: url(/resource/AE_InvertIcon);
+    cursor: pointer;
+    outline: none;
+}
+
+.THIS .invertButton:hover{
+    background-color: rgba(0, 85, 153, 0.15);
+    border-color: rgba(0, 85, 153, 0);
+}
+
+.THIS .calcButton{
+    display: flex;
+    margin-top: 32px;
+    border: 0px;
+    background-color: rgb(0, 85, 153);
+    color: white;
+    vertical-align: center;
+    border-radius: 100px;
+    height: 25px;
+    font-size: 15px;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    line-height: 1.15;
+    padding: 3px 12px;
+    cursor: pointer;
+    outline: none;
+}
+
+.THIS .calcButtonText:hover{
+     text-decoration: underline;
+}

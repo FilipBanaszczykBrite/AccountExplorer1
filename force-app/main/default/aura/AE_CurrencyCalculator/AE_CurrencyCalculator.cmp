@@ -1,0 +1,53 @@
+<aura:component description="AE_CurrencyCalculator" implements="flexipage:availableForAllPageTypes, force:appHostable">
+    <aura:attribute name="amountEntered" type="Boolean"/>
+    <div>
+        <lightning:card>
+            <div class="headerContainer">
+                <h5 class="header">Currency calculator</h5>
+            </div>
+
+            <div class="calculator">
+                <div class="inputRow">
+                    <div class="inputCell">
+                        <p class="inputLabel">Amount:</p>
+                        <div>
+                            <lightning:input type="number" label="" variant="label-hidden">
+
+                            </lightning:input>
+                            <aura:if isTrue="{!v.amountEntered}">
+                                <button class="clearButton" >X</button>
+                            </aura:if>
+                        </div>
+                    </div>
+                    <div class="inputCell">
+                        <p class="inputLabel">Owned currency:</p>
+                        <div>
+                            <lightning:input label="" variant="label-hidden">
+                            </lightning:input>
+                        </div>
+                    </div>
+                    <div class="inputCell">
+                        <button class="invertButton" ></button>
+                    </div>
+                    <div class="inputCell">
+                        <p class="inputLabel">Target currency:</p>
+                        <div>
+                            <lightning:input label="" variant="label-hidden">
+                            </lightning:input>
+                        </div>
+                    </div>
+                    <div class="inputCell">
+                        <button class="calcButton" ><span class="calcButtonText">Calculate</span></button>
+                    </div>
+                </div>
+                <div class="inputRow">
+
+                </div>
+                <div class="inputRow">
+                    <p>1 PLN ...</p>
+                </div>
+            </div>
+        </lightning:card>
+    </div>
+    
+</aura:component>
