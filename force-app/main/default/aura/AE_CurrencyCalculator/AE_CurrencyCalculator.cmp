@@ -1,50 +1,95 @@
-<aura:component description="AE_CurrencyCalculator" implements="flexipage:availableForAllPageTypes, force:appHostable">
-    <aura:attribute name="amountEntered" type="Boolean"/>
+<aura:component description="AE_CurrencyCalculator" implements="flexipage:availableForAllPageTypes, force:appHostable" controller="AE_CurrencyCalculatorController">
+    <aura:attribute name="isAmountEntered" type="Boolean" default="true"/>
+    <aura:attribute name="amount" type="Double" default="100.00"/>
+    <aura:attribute name="amountEntered" type="Double" default="100.00"/>
+    <aura:attribute name="calculatedResult" type="Double"/>
+    <aura:attribute name="calculatedRatio" type="Double"/>
+    <aura:attribute name="ratio" type="String"/>
+    <aura:attribute name="todayDate" type="String"/>
+    <aura:attribute name="ownedCurrency" type="String"/>
+    <aura:attribute name="targetCurrency" type="String"/>
+    <aura:attribute name="ownedCurrencyDisplay" type="String" />
+    <aura:attribute name="targetCurrencyDisplay" type="String"/>
+    <aura:attribute name="currencies" type="String[]" default="['PLN', 'USD', 'EUR']"/>
+    <aura:attribute name="currenciesRatios" type="String" default=" "/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
     <div>
         <lightning:card>
+            <lightning:spinner aura:id="mySpinner" />
             <div class="headerContainer">
                 <h5 class="header">Currency calculator</h5>
             </div>
 
             <div class="calculator">
                 <div class="inputRow">
-                    <div class="inputCell">
+                    <div class="inputCell" style="flex: 2">
                         <p class="inputLabel">Amount:</p>
                         <div>
-                            <lightning:input type="number" label="" variant="label-hidden">
+                            <lightning:input type="number"
+                                             label=""
+                                             variant="label-hidden"
+                                             value="{!v.amountEntered}"
+                                             onchange="{!c.checkAmountEntered}">
 
                             </lightning:input>
-                            <aura:if isTrue="{!v.amountEntered}">
-                                <button class="clearButton" >X</button>
+                            <aura:if isTrue="{!v.isAmountEntered}">
+                                <button class="clearButton" onclick="{!c.clearClick}" >X</button>
                             </aura:if>
                         </div>
                     </div>
-                    <div class="inputCell">
-                        <p class="inputLabel">Owned currency:</p>
+                    <div class="inputCell" style="flex: 2">
+                        <p class="inputLabel">Your currency:</p>
                         <div>
-                            <lightning:input label="" variant="label-hidden">
-                            </lightning:input>
+                            <lightning:select aura:id="selectOwned"
+                                              name="selectOwned"
+                                              label=""
+                                              variant="label-hidden"
+                                              class="label-hidden"
+                                              onchange="{! c.onChangeOwned }">
+                                <aura:iteration items="{!v.currencies}" var="currency">
+                                    <option value="{!currency}">{!currency}</option>
+                                </aura:iteration>
+
+                            </lightning:select>
                         </div>
                     </div>
                     <div class="inputCell">
-                        <button class="invertButton" ></button>
+                        <button class="invertButton" onclick="{!c.invertClick}"></button>
                     </div>
-                    <div class="inputCell">
+                    <div class="inputCell" style="flex: 2">
                         <p class="inputLabel">Target currency:</p>
                         <div>
-                            <lightning:input label="" variant="label-hidden">
-                            </lightning:input>
+                            <lightning:select aura:id="selectTarget"
+                                              name="selectTarget"
+                                              label=""
+                                              variant="label-hidden"
+                                              class="label-hidden"
+                                              onchange="{! c.onChangeTarget }">
+                                <aura:iteration items="{!v.currencies}" var="currency">
+                                    <option value="{!currency}" >{!currency}</option>
+                                </aura:iteration>
+
+                            </lightning:select>
                         </div>
                     </div>
-                    <div class="inputCell">
-                        <button class="calcButton" ><span class="calcButtonText">Calculate</span></button>
+                    <div class="inputCell" style="flex: 2">
+                        <button class="calcButton" onclick="{!c.calculateClick}"><span class="calcButtonText">Calculate</span></button>
                     </div>
                 </div>
                 <div class="inputRow">
-
+                    <div class="ownedCurrency">{!v.amount}
+                        <span class="currencySpan">{!v.ownedCurrencyDisplay}
+                        </span>
+                    </div>
+                    <div class="equalitySign">=</div>
+                    <div class="targetCurrency">{!v.calculatedResult}
+                        <span class="currencySpan">{!v.targetCurrencyDisplay}
+                        </span>
+                    </div>
                 </div>
                 <div class="inputRow">
-                    <p>1 PLN ...</p>
+                    <p class="ratioInfo" >{!v.ratio}<strong>{!v.todayDate}</strong></p>
                 </div>
             </div>
         </lightning:card>
