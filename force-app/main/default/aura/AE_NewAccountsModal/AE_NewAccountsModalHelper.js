@@ -29,6 +29,7 @@
                      if(response.getReturnValue()){
                          cmp.set("v.createPopupOpened", false);
                           this.showToast("success", "Records created successfully", "Success!");
+                          $A.get("e.force:refreshView").fire();
                      }
                      else{
                          cmp.set("v.createPopupOpened", false);

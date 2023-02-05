@@ -7,20 +7,21 @@
 
    deleteAccountRow: function(cmp, event, helper){
        event.stopPropagation()
-       console.log('DELETE controller '+event);
-       helper.handlerDeleteAccount(cmp, event);
+       if(confirm("Are you sure you want to delete account " + event.currentTarget.dataset.value + "?")){
 
+           helper.handlerDeleteAccount(cmp, event);
+       }
    },
 
    editAccountRow: function(cmp, event, helper){
           event.stopPropagation()
-          console.log('EDIT controller '+event);
+
           helper.handlerEditAccount(cmp, event);
 
       },
 
    showAccountDetails: function(cmp, event, helper){
-       console.log('controller '+event);
+
         helper.handlerShowDetails(cmp, event);
    },
 

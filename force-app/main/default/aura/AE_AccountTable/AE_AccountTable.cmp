@@ -8,7 +8,6 @@
     <aura:registerEvent name="showToast" type="force:showToast"/>
     <aura:registerEvent name="AE_PassAccount" type="c:AE_PassAccount"/>
     <aura:registerEvent name="AE_OpenCreatePopup" type="c:AE_OpenCreatePopup"/>
-
     <div class="accountTable">
         <lightning:messages/>
 

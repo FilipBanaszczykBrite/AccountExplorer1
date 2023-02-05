@@ -12,11 +12,9 @@
     },
 
     reloadView: function(cmp, event, helper){
-            var appEvent = $A.get("e.c:AE_RefreshAccountList");
-            console.log('reload');
+        cmp.set("v.editPopupOpened", false);
             helper.showToastEditSuccess();
-             cmp.set("v.editPopupOpened", false);
-            setTimeout(() => {  appEvent.fire(); }, 500);
+            setTimeout(() => {  $A.get("e.force:refreshView").fire(); }, 500);
         },
 
 

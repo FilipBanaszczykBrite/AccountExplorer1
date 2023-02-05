@@ -4,34 +4,45 @@
         let action = cmp.get("c.getAccounts");
         var spinner = cmp.find("mySpinner");
         action.setCallback(this, function(response){
+             $A.util.toggleClass(spinner, "slds-hide");
             cmp.set("v.accounts", response.getReturnValue());
-            console.log(response.getReturnValue());
 
-            $A.util.toggleClass(spinner, "slds-hide");
+
           });
          $A.enqueueAction(action);
-        $A.util.toggleClass(spinner, "slds-hide");
+        $A.util.toggleClass(spinner, "slds-show");
     },
 
    handlerDeleteAccount: function(cmp, event){
-           var accountId = event.target.id;
-           var spinner = cmp.find("mySpinner");
-           let action = cmp.get("c.deleteAccount");
-           action.setParams({ id : accountId });
-           action.setCallback(this, function(response){
-                $A.util.toggleClass(spinner, "slds-hide");
-                $A.get("e.force:refreshView").fire();
-               if(response.getReturnValue()){
-                    this.showToastDeleteSuccess(cmp, event);
+       var accountId = event.target.id;
+       let name = '';
+       var accounts = cmp.get("v.accounts");
+       for(let i = 0; i < accounts.length; i++){
+                   if(accounts[i].Id == accountId){
+                       name = accounts[i].Name;
+                   }
 
                }
-               else{
-                   this.showToastDeleteFail(cmp, event);
-               }
 
-             });
-            $A.enqueueAction(action);
-            $A.util.toggleClass(spinner, "slds-hide");
+                  var spinner = cmp.find("mySpinner");
+                  let action = cmp.get("c.deleteAccount");
+                  action.setParams({ id : accountId });
+                  action.setCallback(this, function(response){
+                       $A.util.toggleClass(spinner, "slds-hide");
+
+                      if(response.getReturnValue()){
+                           this.showToastDeleteSuccess(cmp, event);
+
+                      }
+                      else{
+                          this.showToastDeleteFail(cmp, event);
+                      }
+                        $A.get("e.force:refreshView").fire();
+                    });
+                  $A.util.toggleClass(spinner, "slds-show");
+                   $A.enqueueAction(action);
+
+
        },
 
        showToastDeleteSuccess: function(cmp, event) {
@@ -56,7 +67,7 @@
 
      handlerShowDetails: function(cmp, event){
           var spinner = cmp.find("mySpinner");
-          $A.util.toggleClass(spinner, "slds-hide");
+          $A.util.toggleClass(spinner, "slds-show");
         var id = cmp.get("v.accounts")[event.currentTarget.rowIndex - 1].Id;
         var account;
         var accounts = cmp.get("v.accounts")
@@ -66,7 +77,7 @@
                  break;
             }
         }
-        $A.util.toggleClass(spinner, "slds-hide");
+
         var appEvent = $A.get("e.c:AE_PassAccount");
         appEvent.setParams({"accountId" : account.Id});
         appEvent.fire();

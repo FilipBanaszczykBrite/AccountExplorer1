@@ -3,6 +3,7 @@
     <aura:handler event="c:AE_OpenCreatePopup" action="{!c.open}"/>
     <aura:attribute name="createPopupOpened" type="Boolean"/>
     <aura:attribute name="newAccounts" type="List"/>
+    <aura:attribute name="onlyOneRow" type="Boolean" default="true"/>
     <aura:attribute name="draftValues" type="List" default="[]"/>
     <aura:attribute name="columns" type="String[]"/>
     <aura:if isTrue="{!v.createPopupOpened}">
@@ -11,7 +12,13 @@
                      aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open"
                      style="width:100%; background-color: rgba( 0, 0, 0, 0.5);">
                 <div style="width:74%; margin-left: 13%; margin-top: 20%">
-                    <lightning:datatable keyField="Id" hideCheckboxColumn="true" data="{!v.newAccounts}" draftValues="{!v.draftValues}" columns="{!v.columns}" onsave="{!c.createAccounts}"/>
+                    <lightning:datatable keyField="Id"
+                                         hideCheckboxColumn="true"
+                                         data="{!v.newAccounts}"
+                                         draftValues="{!v.draftValues}"
+                                         columns="{!v.columns}"
+                                         onsave="{!c.createAccounts}"
+                                         onrowaction="{!c.handleRowAction}"/>
 
 
                     <footer class="slds-modal__footer">
@@ -20,7 +27,11 @@
                                           title="New"
                                           onclick="{! c.newRow }"/>
 
-
+                        <lightning:button variant="destructive"
+                                          label="Delete row"
+                                          title="Delete row"
+                                          disabled="{!v.onlyOneRow}"
+                                          onclick="{! c.deleteRow }"/>
                         <lightning:button variant="neutral"
                                           label="Close"
                                           title="Close"
