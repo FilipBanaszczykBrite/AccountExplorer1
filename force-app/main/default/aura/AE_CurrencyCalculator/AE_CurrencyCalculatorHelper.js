@@ -4,9 +4,12 @@
         let action = cmp.get("c.getCurrencyRatios");
         var spinner = cmp.find("mySpinner");
         action.setCallback(this, function(response){
-             var matrix = new Map(Object.entries(JSON.parse(response.getReturnValue())));
-             var currencies = Array.from(matrix.keys())
-            cmp.set("v.currenciesRatios", response.getReturnValue());
+            const rates = response.getReturnValue()[0];
+            const date = response.getReturnValue()[1];
+             var matrix = new Map(Object.entries(JSON.parse(rates)));
+             var currencies = Array.from(matrix.keys());
+            cmp.set("v.currenciesRatios", rates);
+            cmp.set("v.ratesDate", ' ' + date);
             cmp.set("v.currencies", currencies);
             cmp.set("v.ownedCurrency", currencies[0]);
             cmp.set("v.targetCurrency", 'EUR');
@@ -15,8 +18,8 @@
             }
             cmp.find('selectOwned').set('v.value', cmp.get("v.ownedCurrency"));
             cmp.find('selectTarget').set('v.value', cmp.get("v.targetCurrency"));
-            $A.util.toggleClass(spinner, "slds-hide");
-            this.calculate(cmp)
+             $A.util.toggleClass(spinner, "slds-hide");
+            this.calculate(cmp);
           });
          $A.enqueueAction(action);
         $A.util.toggleClass(spinner, "slds-show");
@@ -41,17 +44,13 @@
               }
               else{
                   var matrix = new Map(Object.entries(JSON.parse(json)));
-                            var targetMap = new Map(Object.entries(matrix.get(cmp.get("v.ownedCurrency"))));
-                            var rate = targetMap.get(cmp.get("v.targetCurrency"));
-                            console.log('RATE ' + rate + ' ' + cmp.get("v.ownedCurrency") + ' ' + cmp.get("v.targetCurrency"))
-                            cmp.set("v.ownedCurrencyDisplay", cmp.get("v.ownedCurrency"));
-                            cmp.set("v.targetCurrencyDisplay", cmp.get("v.targetCurrency"));
-                           cmp.set("v.amount", parseFloat(owned).toFixed(2));
-                           cmp.set("v.calculatedResult", (parseFloat(owned) * rate).toFixed(2));
-
-                            cmp.set("v.ratio", 1 + ' ' + cmp.get("v.ownedCurrency") + ' = ' + rate.toFixed(4) + ' ' + cmp.get("v.targetCurrency") +
-                             ', according to average NPB rate, of the day: ');
-                             cmp.set("v.todayDate", this.getFormattedDate(new Date));
+                    var targetMap = new Map(Object.entries(matrix.get(cmp.get("v.ownedCurrency"))));
+                    var rate = targetMap.get(cmp.get("v.targetCurrency"));
+                    cmp.set("v.ownedCurrencyDisplay", cmp.get("v.ownedCurrency"));
+                    cmp.set("v.targetCurrencyDisplay", cmp.get("v.targetCurrency"));
+                   cmp.set("v.amount", parseFloat(owned).toFixed(2));
+                   cmp.set("v.calculatedResult", (parseFloat(owned) * rate).toFixed(2));
+                    cmp.set("v.ratio", 1 + ' ' + cmp.get("v.ownedCurrency") + ' = ' + Number(rate.toFixed(4)) + ' ' + cmp.get("v.targetCurrency"));
               }
          }
      },

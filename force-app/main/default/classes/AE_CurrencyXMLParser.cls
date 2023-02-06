@@ -18,4 +18,19 @@ public with sharing class AE_CurrencyXMLParser {
         }
         return currencyMap;
     }
+
+    public static  String getDateFromXML(String body){
+        String result = '';
+        Dom.Document doc = new Dom.Document();
+        doc.load(body);
+        Dom.XMLNode rootElement = doc.getRootElement();
+        for ( Dom.XMLNode childElement : rootElement.getChildElements() ) {
+            for (Dom.XMLNode detailElement : childElement.getChildElements()){
+                if(detailElement.getName() == 'Cube'){
+                    result = detailElement.getAttributeValue('time', null);
+                }
+            }
+        }
+        return result;
+    }
 }

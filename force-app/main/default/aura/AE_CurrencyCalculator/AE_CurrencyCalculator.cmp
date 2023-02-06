@@ -5,7 +5,8 @@
     <aura:attribute name="calculatedResult" type="Double"/>
     <aura:attribute name="calculatedRatio" type="Double"/>
     <aura:attribute name="ratio" type="String"/>
-    <aura:attribute name="todayDate" type="String"/>
+    <aura:attribute name="date" type="String"/>
+    <aura:attribute name="ratesDate" type="String"/>
     <aura:attribute name="ownedCurrency" type="String"/>
     <aura:attribute name="targetCurrency" type="String"/>
     <aura:attribute name="ownedCurrencyDisplay" type="String" />
@@ -18,20 +19,19 @@
         <lightning:card>
             <lightning:spinner aura:id="mySpinner" />
             <div class="headerContainer">
-                <h5 class="header">Currency calculator</h5>
+                <h5 class="header">{!$Label.c.AE_CurrencyCalculatorHeader}</h5>
             </div>
 
             <div class="calculator">
                 <div class="inputRow">
                     <div class="inputCell" style="flex: 2">
-                        <p class="inputLabel">Amount:</p>
+                        <p class="inputLabel">{!$Label.c.AE_Amount}:</p>
                         <div>
                             <lightning:input type="number"
                                              label=""
                                              variant="label-hidden"
                                              value="{!v.amountEntered}"
                                              onchange="{!c.checkAmountEntered}">
-
                             </lightning:input>
                             <aura:if isTrue="{!v.isAmountEntered}">
                                 <button class="clearButton" onclick="{!c.clearClick}" >X</button>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="inputCell" style="flex: 2">
-                        <p class="inputLabel">Your currency:</p>
+                        <p class="inputLabel">{!$Label.c.AE_OwnedCurrency}:</p>
                         <div>
                             <lightning:select aura:id="selectOwned"
                                               name="selectOwned"
@@ -58,7 +58,7 @@
                         <button class="invertButton" onclick="{!c.invertClick}"></button>
                     </div>
                     <div class="inputCell" style="flex: 2">
-                        <p class="inputLabel">Target currency:</p>
+                        <p class="inputLabel">{!$Label.c.AE_TargetCurrency}:</p>
                         <div>
                             <lightning:select aura:id="selectTarget"
                                               name="selectTarget"
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="inputCell" style="flex: 2">
-                        <button class="calcButton" onclick="{!c.calculateClick}"><span class="calcButtonText">Calculate</span></button>
+                        <button class="calcButton" onclick="{!c.calculateClick}" ><span class="calcButtonText">{!$Label.c.AE_CalculateButton}</span></button>
                     </div>
                 </div>
                 <div class="inputRow">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="inputRow">
-                    <p class="ratioInfo" >{!v.ratio}<strong>{!v.todayDate}</strong></p>
+                    <p class="ratioInfo" >{!v.ratio} {!$Label.c.AE_RatioInfo} <strong> {!v.ratesDate}</strong></p>
                 </div>
             </div>
         </lightning:card>

@@ -5,14 +5,15 @@ public with sharing class AE_CurrencyCalculatorController {
     private static final String url = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
 
     @AuraEnabled
-    public static String getCurrencyRatios(){
+    public static List<String> getCurrencyRatios(){
         Http h = new Http();
         HttpRequest req = new HttpRequest();
         req.setEndpoint(url);
         req.setTimeout(60000);
         req.setMethod('GET');
         HttpResponse res = h.send(req);
-        return JSON.serialize(getMatrixFromMap(AE_CurrencyXMLParser.parseXMLToMap(res.getBody())));
+        String body = res.getBody();
+        return new List<String>{JSON.serialize(getMatrixFromMap(AE_CurrencyXMLParser.parseXMLToMap(body))),  AE_CurrencyXMLParser.getDateFromXML(body)};
     }
 
     private static Map<String, Map<String, Double>> getMatrixFromMap(Map<String, Double> currencyMap){
